@@ -63,7 +63,7 @@ export default function URLInput({ currentUrl, onUrlChange, className = '' }: UR
           >
             HLS 流媒体 URL
           </label>
-          <div className="flex gap-2">
+          <div className="flex gap-2 min-w-0"> {/* 添加min-w-0防止flex溢出 */}
             <input
               id="stream-url"
               type="text"
@@ -71,7 +71,7 @@ export default function URLInput({ currentUrl, onUrlChange, className = '' }: UR
               onChange={handleInputChange}
               placeholder="输入HLS流媒体URL (例如: https://example.com/stream.m3u8)"
               className={`
-                flex-1 px-3 py-2 border rounded-lg 
+                flex-1 min-w-0 px-3 py-2 border rounded-lg text-black
                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent
                 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400
                 ${isValid 
@@ -83,7 +83,7 @@ export default function URLInput({ currentUrl, onUrlChange, className = '' }: UR
             <button
               type="submit"
               className="
-                px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg 
+                flex-shrink-0 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg 
                 transition-colors duration-200 flex items-center gap-2
                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
                 dark:focus:ring-offset-gray-800
@@ -117,22 +117,25 @@ export default function URLInput({ currentUrl, onUrlChange, className = '' }: UR
               className="
                 w-full text-left p-3 rounded-lg border border-gray-200 dark:border-gray-600
                 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200
-                group
+                group relative
               "
+              title={example.url} // 添加tooltip
             >
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center justify-between min-w-0">
+                <div className="flex-1 min-w-0">
                   <div className="font-medium text-gray-800 dark:text-gray-200">
                     {example.name}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 truncate pr-2">
                     {example.url}
                   </div>
                 </div>
-                <ExternalLink 
-                  size={16} 
-                  className="text-gray-400 group-hover:text-red-500 transition-colors" 
-                />
+                <div className="flex-shrink-0">
+                  <ExternalLink 
+                    size={16} 
+                    className="text-gray-400 group-hover:text-red-500 transition-colors" 
+                  />
+                </div>
               </div>
             </button>
           ))}
@@ -142,8 +145,11 @@ export default function URLInput({ currentUrl, onUrlChange, className = '' }: UR
       {/* 当前播放URL显示 */}
       {currentUrl && currentUrl !== url && (
         <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <div className="text-sm text-gray-600 dark:text-gray-400">当前播放：</div>
-          <div className="text-sm font-mono text-gray-800 dark:text-gray-200 truncate">
+          <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">当前播放：</div>
+          <div 
+            className="text-sm font-mono text-gray-800 dark:text-gray-200 truncate cursor-pointer hover:text-red-500 transition-colors" 
+            title={currentUrl} // 添加tooltip显示完整URL
+          >
             {currentUrl}
           </div>
         </div>
