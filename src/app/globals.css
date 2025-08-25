@@ -22,5 +22,68 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 确保在切换主题时有平滑过渡 */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* 优化滚动条在黑夜模式下的显示 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #6b7280;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 确保选中文本在黑夜模式下有合适的颜色 */
+::selection {
+  background-color: #ef4444;
+  color: white;
+}
+
+.dark ::selection {
+  background-color: #f87171;
+  color: white;
+}
+
+/* 为播放器组件提供额外的样式支持 */
+.player-container {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* 响应式设计的断点调整 */
+@media (max-width: 768px) {
+  .player-container {
+    border-radius: 0.25rem;
+  }
 }

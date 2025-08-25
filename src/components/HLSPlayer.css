@@ -1,0 +1,58 @@
+/* HLS播放器自定义样式 */
+.player-slider {
+  background: linear-gradient(
+    to right,
+    #ef4444 0%,
+    #ef4444 var(--slider-progress, 0%),
+    rgba(255, 255, 255, 0.3) var(--slider-progress, 0%),
+    rgba(255, 255, 255, 0.3) 100%
+  );
+}
+
+.player-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.player-slider::-webkit-slider-track {
+  background: transparent;
+}
+
+.player-slider::-moz-range-track {
+  background: transparent;
+}
+
+/* 确保在全屏模式下正确显示 */
+.player-slider:focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* 黑夜模式下的调整 */
+.dark .player-slider::-webkit-slider-thumb {
+  background: #f87171;
+}
+
+.dark .player-slider::-moz-range-thumb {
+  background: #f87171;
+}
+
+.dark .player-slider:focus {
+  outline-color: #f87171;
+}

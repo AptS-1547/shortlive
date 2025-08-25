@@ -1,103 +1,170 @@
-import Image from "next/image";
+'use client'
+
+import { useState } from 'react'
+import HLSPlayer from '../components/HLSPlayer'
+import URLInput from '../components/URLInput'
+import ThemeToggle from '../components/ThemeToggle'
+import { Monitor, Smartphone } from 'lucide-react'
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // 默认的HLS流媒体URL
+  const [currentUrl, setCurrentUrl] = useState(
+    'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+  )
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const handleUrlChange = (newUrl: string) => {
+    setCurrentUrl(newUrl)
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      {/* 头部 */}
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+                <Monitor className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  HLS 流媒体播放器
+                </h1>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  基于 React Player 的现代化播放器
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                <Monitor className="w-4 h-4" />
+                <span>桌面端</span>
+                <span className="text-gray-300 dark:text-gray-600">|</span>
+                <Smartphone className="w-4 h-4" />
+                <span>移动端</span>
+              </div>
+              <ThemeToggle />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* 主要内容 */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* 播放器区域 */}
+          <div className="lg:col-span-2">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div className="mb-4">
+                <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                  视频播放器
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  支持 HLS 流媒体播放，具有自适应宽度和全屏功能
+                </p>
+              </div>
+              
+              <HLSPlayer 
+                url={currentUrl}
+                autoPlay={true}
+                className="w-full"
+              />
+              
+              {/* 播放器信息 */}
+              <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">
+                  播放器功能：
+                </h3>
+                <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                  <li>• 自动播放 HLS 流媒体内容</li>
+                  <li>• 完整的播放控制（播放、暂停、进度条、音量）</li>
+                  <li>• 响应式设计，支持全屏显示</li>
+                  <li>• 支持动态更换流媒体 URL</li>
+                  <li>• 移动端和桌面端兼容</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* 控制面板 */}
+          <div className="space-y-6">
+            {/* URL输入组件 */}
+            <URLInput 
+              currentUrl={currentUrl}
+              onUrlChange={handleUrlChange}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+            {/* 技术栈信息 */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                技术栈
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">框架</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Next.js 15</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">UI 库</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">React 19</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">播放器</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">React Player</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">样式</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">Tailwind CSS 4</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">包管理</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">pnpm</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-600 dark:text-gray-400">类型系统</span>
+                  <span className="font-medium text-gray-800 dark:text-gray-200">TypeScript</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 使用说明 */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                使用说明
+              </h3>
+              <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                <div>
+                  <strong className="text-gray-800 dark:text-gray-200">1. 更换流媒体：</strong>
+                  <br />在上方URL输入框中输入新的HLS流媒体地址，点击播放按钮。
+                </div>
+                <div>
+                  <strong className="text-gray-800 dark:text-gray-200">2. 播放控制：</strong>
+                  <br />使用播放器底部的控制栏进行播放、暂停、调节音量等操作。
+                </div>
+                <div>
+                  <strong className="text-gray-800 dark:text-gray-200">3. 全屏模式：</strong>
+                  <br />点击播放器右下角的全屏按钮进入全屏播放模式。
+                </div>
+                <div>
+                  <strong className="text-gray-800 dark:text-gray-200">4. 主题切换：</strong>
+                  <br />点击右上角的主题切换按钮在明暗模式间切换。
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* 页脚 */}
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center text-gray-500 dark:text-gray-400">
+            <p>© 2025 HLS 流媒体播放器 - 使用 React Player 构建</p>
+            <p className="mt-2">支持 HLS、DASH 和多种视频格式</p>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
