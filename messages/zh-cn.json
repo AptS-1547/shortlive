@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "HLS 流媒体播放器",
+    "description": "基于 React Player 的现代化 HLS 流媒体播放器"
+  },
+  "header": {
+    "title": "HLS 流媒体播放器",
+    "description": "基于 React Player 的现代化播放器",
+    "desktop": "桌面端",
+    "mobile": "移动端"
+  },
+  "player": {
+    "title": "视频播放器",
+    "description": "支持 HLS 流媒体播放，具有自适应宽度和全屏功能",
+    "features": {
+      "title": "播放器功能：",
+      "autoPlay": "自动播放 HLS 流媒体内容",
+      "controls": "完整的播放控制（播放、暂停、进度条、音量）",
+      "responsive": "响应式设计，支持全屏显示",
+      "dynamicUrl": "支持动态更换流媒体 URL",
+      "compatibility": "移动端和桌面端兼容"
+    }
+  },
+  "urlInput": {
+    "title": "流媒体URL设置",
+    "label": "HLS 流媒体 URL",
+    "placeholder": "输入HLS流媒体URL (例如: https://example.com/stream.m3u8)",
+    "playButton": "播放",
+    "validation": "请输入有效的URL",
+    "examples": "示例流媒体：",
+    "currentPlaying": "当前播放：",
+    "exampleUrls": {
+      "bigBuckBunny": "Big Buck Bunny (测试流)",
+      "appleExample": "Apple 示例流"
+    }
+  },
+  "techStack": {
+    "title": "技术栈",
+    "frontend": "前端技术",
+    "streaming": "流媒体技术",
+    "styling": "样式与界面"
+  },
+  "language": {
+    "chinese": "中文",
+    "english": "English"
+  }
+}

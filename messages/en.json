@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "HLS Media Player",
+    "description": "Modern HLS streaming player based on React Player"
+  },
+  "header": {
+    "title": "HLS Media Player",
+    "description": "Modern player based on React Player",
+    "desktop": "Desktop",
+    "mobile": "Mobile"
+  },
+  "player": {
+    "title": "Video Player",
+    "description": "Supports HLS streaming with adaptive width and fullscreen features",
+    "features": {
+      "title": "Player Features:",
+      "autoPlay": "Auto-play HLS streaming content",
+      "controls": "Complete playback controls (play, pause, progress bar, volume)",
+      "responsive": "Responsive design with fullscreen support",
+      "dynamicUrl": "Support for dynamic stream URL switching",
+      "compatibility": "Mobile and desktop compatibility"
+    }
+  },
+  "urlInput": {
+    "title": "Stream URL Settings",
+    "label": "HLS Stream URL",
+    "placeholder": "Enter HLS stream URL (e.g., https://example.com/stream.m3u8)",
+    "playButton": "Play",
+    "validation": "Please enter a valid URL",
+    "examples": "Example streams:",
+    "currentPlaying": "Currently playing:",
+    "exampleUrls": {
+      "bigBuckBunny": "Big Buck Bunny (Test Stream)",
+      "appleExample": "Apple Example Stream"
+    }
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "frontend": "Frontend Technology",
+    "streaming": "Streaming Technology",
+    "styling": "Styling & UI"
+  },
+  "language": {
+    "chinese": "中文",
+    "english": "English"
+  }
+}
